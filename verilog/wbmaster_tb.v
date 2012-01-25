@@ -29,8 +29,8 @@ begin
         intr = 1'b0;
         
         #15 rst = 1'b0;
-        #20 ack = 1'b1;
-        #50 err = 1'b1;
+        #35 ack = 1'b1;
+        #70 err = 1'b1;
         #20000 $finish;
 
 end
