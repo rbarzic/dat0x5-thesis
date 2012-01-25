@@ -12,17 +12,31 @@ wire [sw:0] sel;
 wire [aw:0] adr, dat;
 wire we, stb, cyc;
 
+wbmaster master0(.ADR_O(adr), .DAT_O(dat), .WE_O(we), .SEL_O(sel), .STB_O(stb), .CYC_O(cyc), .RST_I(rst), .CLK_I(clk), .DAT_I(data), .ACK_I(ack), .ERR_I(err), .INTR_I(intr));
+
+        initial        
+                clk = 1'b0;
+        always
+                #5 clk = ~clk;
+
+
 initial
 begin
         $dumpvars;
-        rst = 1'b0;
-        clk = 1'b0;
+        rst = 1'b1;
         ack = 1'b0;
         err = 1'b0;
         intr = 1'b0;
+        
+        #15 rst = 1'b0;
+        #20 ack = 1'b1;
+        #50 err = 1'b1;
+        #20000 $finish;
 
 end
 
-wbmaster master0(.ADR_O(adr), .DAT_O(dat), .WE_O(we), .SEL_O(sel), .STB_O(stb), .CYC_O(cyc), .RST_I(rst), .CLK_I(clk), .DAT_I(data), .ACK_I(ack), .ERR_I(err), .INTR_I(intr));
+
+
+
 
 endmodule
