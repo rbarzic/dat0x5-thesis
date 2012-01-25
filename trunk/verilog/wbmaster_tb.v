@@ -6,7 +6,7 @@ parameter dw = `data_width-1;
 parameter sw = `select_width-1;
 
 reg rst, clk, ack, err,intr;
-reg [dw:0] data = 8'b1111_0000;
+reg [dw:0] data = 8'bzzzz_zzzz;
 
 wire [sw:0] sel;
 wire [aw:0] adr, dat;
@@ -30,6 +30,7 @@ begin
         
         #15 rst = 1'b0;
         #35 ack = 1'b1;
+        data = 8'b1111_0000;
         #70 err = 1'b1;
         #20000 $finish;
 
