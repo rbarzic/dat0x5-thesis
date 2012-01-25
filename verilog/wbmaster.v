@@ -39,6 +39,7 @@ parameter state1 = 3'b001;
 parameter state2 = 3'b010;
 parameter state3 = 3'b011;
 parameter error = 3'b100;
+
 //state mach‌ine for read cycle
 always @ (posedge CLK_I)
         begin
@@ -77,6 +78,8 @@ always @ (curr_state)
                 state2: begin 
                         if(ACK_I == 1'b1)  // prepare to latch the data on DATA_I() and TAGD_I()
                         next_state = state3;
+                        else
+                        next_state = reset;
                         end
 
                 state3: begin 
@@ -87,6 +90,7 @@ always @ (curr_state)
                         end
 
                 error: next_state = reset;
+
                endcase 
         end
 endmodule
