@@ -26,7 +26,7 @@ input RST_I, CLK_I, ACK_I, ERR_I, INTR_I;
 input [dw:0] DAT_I;
 
 reg [dw:0] data_reg;
-reg[1:0] curr_state, next_state;
+reg[2:0] curr_state, next_state;
 
 reg [aw:0] ADR_O;
 reg [dw:0] DAT_O;
@@ -34,11 +34,11 @@ reg WE_O, STB_O, CYC_O;
 reg [sw:0] SEL_O;
 
 //parameter definitions for state machines.
-parameter reset = 2'b00;
-parameter state1 = 2'b01;
-parameter state2 = 2'b10;
-parameter state3 = 2'b11;
-
+parameter reset = 3'b000;
+parameter state1 = 3'b001;
+parameter state2 = 3'b010;
+parameter state3 = 3'b011;
+parameter state4 = 3'b100;
 
 //state mach‌ine for read cycle
 always @ (posedge CLK_I)
@@ -82,6 +82,10 @@ always @ (curr_state or ACK_I or ERR_I)
 
                 state3: begin //clock edge-3
                         data_reg =  DAT_I;    // latch the data
+                        next_state = state4;
+                        end
+
+                state4: begin                        
                         STB_O = 1'b0;           
                         CYC_O = 1'b0;
                         next_state = reset;
