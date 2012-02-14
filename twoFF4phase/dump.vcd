@@ -1,0 +1,654 @@
+$date
+	Tue Feb 14 21:21:46 2012
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module sync_tb $end
+$var wire 1 ! d $end
+$var wire 1 " f $end
+$var wire 8 # outs [7:0] $end
+$var reg 1 $ clk $end
+$var reg 8 % data_core [7:0] $end
+$var reg 1 & reset $end
+$var reg 1 ' v $end
+$scope module syncss1 $end
+$var wire 1 ( ack1 $end
+$var wire 1 ) clk $end
+$var wire 1 * d1 $end
+$var wire 8 + data [7:0] $end
+$var wire 1 , f1 $end
+$var wire 8 - in_data [7:0] $end
+$var wire 8 . out_data [7:0] $end
+$var wire 1 / req1 $end
+$var wire 1 0 reset $end
+$var wire 1 1 v $end
+$var reg 1 2 d $end
+$var reg 1 3 f $end
+$scope module tx1 $end
+$var wire 1 4 a1 $end
+$var wire 1 5 a2 $end
+$var wire 1 ( ack $end
+$var wire 1 ) clk $end
+$var wire 8 6 input_tx [7:0] $end
+$var wire 1 0 reset $end
+$var wire 1 1 v $end
+$var reg 1 7 a3 $end
+$var reg 2 8 current_state [1:0] $end
+$var reg 1 9 f $end
+$var reg 2 : next_state [1:0] $end
+$var reg 8 ; output_tx [7:0] $end
+$var reg 1 < req $end
+$var reg 1 = statemachine $end
+$scope module dff1 $end
+$var wire 1 ) clk $end
+$var wire 1 ( d $end
+$var wire 1 0 reset $end
+$var reg 1 > q $end
+$upscope $end
+$scope module dff2 $end
+$var wire 1 ) clk $end
+$var wire 1 4 d $end
+$var wire 1 0 reset $end
+$var reg 1 ? q $end
+$upscope $end
+$upscope $end
+$scope module rx1 $end
+$var wire 1 ) clk $end
+$var wire 8 @ input_rx [7:0] $end
+$var wire 1 A r1 $end
+$var wire 1 B r2 $end
+$var wire 1 / req $end
+$var wire 1 0 reset $end
+$var reg 1 C ack $end
+$var reg 2 D current_state [1:0] $end
+$var reg 1 E d $end
+$var reg 2 F next_state [1:0] $end
+$var reg 8 G output_rx [7:0] $end
+$var reg 1 H r3 $end
+$var reg 1 I statemachine $end
+$scope module dff1 $end
+$var wire 1 ) clk $end
+$var wire 1 / d $end
+$var wire 1 0 reset $end
+$var reg 1 J q $end
+$upscope $end
+$scope module dff2 $end
+$var wire 1 ) clk $end
+$var wire 1 A d $end
+$var wire 1 0 reset $end
+$var reg 1 K q $end
+$upscope $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+xK
+xJ
+xI
+xH
+bx G
+bx F
+xE
+bx D
+xC
+xB
+xA
+bx @
+x?
+x>
+x=
+x<
+bx ;
+bx :
+x9
+bx 8
+x7
+bx 6
+x5
+x4
+x3
+x2
+x1
+x0
+x/
+bx .
+bx -
+x,
+bx +
+x*
+0)
+x(
+x'
+x&
+bx %
+0$
+bx #
+x"
+x!
+$end
+#1
+b0 :
+b0 F
+0>
+04
+0?
+05
+0=
+b0 ;
+b0 +
+b0 @
+0J
+0A
+0K
+0B
+0I
+b0 G
+b0 #
+b0 .
+b0 8
+b0 D
+1&
+10
+1$
+1)
+#2
+b10101111 %
+b10101111 -
+b10101111 6
+0$
+0)
+#3
+xJ
+xA
+x>
+x4
+0&
+00
+1$
+1)
+#4
+0$
+0)
+#5
+0<
+0/
+b1 :
+03
+0"
+x?
+x5
+1=
+b10101111 ;
+b10101111 +
+b10101111 @
+09
+0,
+07
+xK
+xB
+1$
+1)
+1'
+11
+#6
+0$
+0)
+#7
+x3
+x"
+1<
+1/
+b10 :
+0J
+0A
+x9
+x,
+x7
+b1 8
+1$
+1)
+#8
+0$
+0)
+#9
+1J
+1A
+0K
+0B
+b10 8
+1$
+1)
+#10
+0$
+0)
+#11
+1K
+1B
+1$
+1)
+#12
+0$
+0)
+#13
+0C
+0(
+b1 F
+1I
+1H
+b10101111 G
+b10101111 #
+b10101111 .
+1$
+1)
+#14
+0$
+0)
+#15
+02
+0!
+1C
+1(
+b10 F
+0E
+0*
+0>
+04
+b1 D
+1$
+1)
+0'
+01
+#16
+0$
+0)
+b110101 %
+b110101 -
+b110101 6
+#17
+1>
+14
+0?
+05
+b110101 ;
+b110101 +
+b110101 @
+b10 D
+1$
+1)
+1'
+11
+#18
+0$
+0)
+#19
+03
+0"
+0<
+0/
+b11 :
+b110101 G
+b110101 #
+b110101 .
+09
+0,
+07
+1?
+15
+1$
+1)
+#20
+0$
+0)
+#21
+13
+1"
+19
+1,
+17
+0J
+0A
+b11 8
+1$
+1)
+#22
+0$
+0)
+#23
+0C
+0(
+b1 F
+03
+0"
+0K
+0B
+09
+0,
+1$
+1)
+#24
+0$
+0)
+#25
+0>
+04
+b1 D
+1$
+1)
+#26
+0$
+0)
+#27
+b1 :
+0?
+05
+1$
+1)
+0'
+01
+#28
+0$
+0)
+#29
+b1 8
+1$
+1)
+#30
+0$
+0)
+#31
+1$
+1)
+#32
+0$
+0)
+#33
+1$
+1)
+#34
+0$
+0)
+#35
+1$
+1)
+#36
+0$
+0)
+#37
+1$
+1)
+#38
+0$
+0)
+#39
+1$
+1)
+#40
+0$
+0)
+#41
+1$
+1)
+#42
+0$
+0)
+#43
+1$
+1)
+#44
+0$
+0)
+#45
+1$
+1)
+#46
+0$
+0)
+#47
+1$
+1)
+#48
+0$
+0)
+#49
+1$
+1)
+#50
+0$
+0)
+#51
+1$
+1)
+#52
+0$
+0)
+#53
+1$
+1)
+#54
+0$
+0)
+#55
+1$
+1)
+#56
+0$
+0)
+#57
+1$
+1)
+#58
+0$
+0)
+#59
+1$
+1)
+#60
+0$
+0)
+#61
+1$
+1)
+#62
+0$
+0)
+#63
+1$
+1)
+#64
+0$
+0)
+#65
+1$
+1)
+#66
+0$
+0)
+#67
+1$
+1)
+#68
+0$
+0)
+#69
+1$
+1)
+#70
+0$
+0)
+#71
+1$
+1)
+#72
+0$
+0)
+#73
+1$
+1)
+#74
+0$
+0)
+#75
+1$
+1)
+#76
+0$
+0)
+#77
+1$
+1)
+#78
+0$
+0)
+#79
+1$
+1)
+#80
+0$
+0)
+#81
+1$
+1)
+#82
+0$
+0)
+#83
+1$
+1)
+#84
+0$
+0)
+#85
+1$
+1)
+#86
+0$
+0)
+#87
+1$
+1)
+#88
+0$
+0)
+#89
+1$
+1)
+#90
+0$
+0)
+#91
+1$
+1)
+#92
+0$
+0)
+#93
+1$
+1)
+#94
+0$
+0)
+#95
+1$
+1)
+#96
+0$
+0)
+#97
+1$
+1)
+#98
+0$
+0)
+#99
+1$
+1)
+#100
+0$
+0)
+#101
+1$
+1)
+#102
+0$
+0)
+#103
+1$
+1)
+#104
+0$
+0)
+#105
+1$
+1)
+#106
+0$
+0)
+#107
+1$
+1)
+#108
+0$
+0)
+#109
+1$
+1)
+#110
+0$
+0)
+#111
+1$
+1)
+#112
+0$
+0)
+#113
+1$
+1)
+#114
+0$
+0)
+#115
+1$
+1)
+#116
+0$
+0)
+#117
+1$
+1)
+#118
+0$
+0)
+#119
+1$
+1)
+#120
+0$
+0)
+#121
+1$
+1)
+#122
+0$
+0)
+#123
+1$
+1)
+#124
+0$
+0)
+#125
+1$
+1)
+#126
+0$
+0)
+#127
+1$
+1)
