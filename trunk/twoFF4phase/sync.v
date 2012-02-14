@@ -22,9 +22,7 @@ module sync_multi(/*AUTOARG*/
    reg			f;
    wire [DATA_MSB:0]	out_data;
    // End of automatics
-   wire [DATA_MSB:0]   data, out_data1;
-   reg 	       ack, req;
-   reg [DATA_MSB:0] data_temp;
+   wire [DATA_MSB:0]   data;   
    wire ack1, req1, f1, d1;
  
    transmitter tx1(.output_tx(data), .req(req1), .f(f1), .clk(clk), .v(v), .reset(reset), .ack(ack1), .input_tx(in_data));
@@ -32,7 +30,5 @@ module sync_multi(/*AUTOARG*/
         always @* begin
                 f =f1;
                 d =d1;
-        end        
-
-   
+        end           
 endmodule // sync_multi

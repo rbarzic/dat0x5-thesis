@@ -1,1 +1,3 @@
-iverilog -o sync_tb sync_tb.v sync.v txfsm2.v rxfsm.v sync.v def.v dff.v
+iverilog -o sync_tb sync_tb.v sync.v txfsm.v rxfsm.v def.v dff.v
+
+https://dat0x5-thesis.googlecode.com/svn/trunk/ dat0x5-thesis
