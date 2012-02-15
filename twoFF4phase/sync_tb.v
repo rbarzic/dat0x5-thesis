@@ -10,17 +10,17 @@ parameter  DATA_WIDTH = `DATA_WIDTHS,
    reg [DATA_MSB:0] data_core;
    reg 		    clk1, clk2, reset, v;
  
-   sync_multi syncss1(.out_data(outs), .f(f), .d(d), .in_data(data_core), .v(v), .clk1(clk1), .clk2(clk2), .reset(reset));
+   sync_multi syncss1(.out_data(outs), .f(f), .d(d), .in_data(data_core), .v(v), .clk_tx(clk1), .clk_rx(clk2), .reset(reset));
    
    initial        
      clk1 = 1'b0;
    always
-     #1 clk1 = ~clk1;
+     #1 clk1 = ~clk1; //tx-clk
 
    initial        
      clk2 = 1'b0;
    always
-     #2 clk2 = ~clk2;
+     #2 clk2 = ~clk2; //rx-clk
 
    initial
      begin
