@@ -38,13 +38,13 @@ module transmitter(/*AUTOARG*/
    dff  dff2(.q(a2), .d(a1), .clk(clk), .reset(reset));
    
    always @(posedge clk or posedge reset) begin
+      a3 <= a2;
+      f <= (! a3) & a2;
       if(reset) begin
 	 output_tx <= 0;
          statemachine <= 1'b0;	 
       end else begin
 	 if (v == 1'b1) begin
-	    a3 <= a2;
-	    f <= (! a3) & a2;
 	    output_tx <= input_tx; // Put the data into transmit data buffer	   
 	    statemachine <= 1'b1;
 	 end	 
