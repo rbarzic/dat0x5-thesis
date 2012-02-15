@@ -20,25 +20,17 @@ parameter  DATA_WIDTH = `DATA_WIDTHS,
    initial        
      clk2 = 1'b0;
    always
-     #2 clk2 = ~clk2; //rx-clk
+     #10 clk2 = ~clk2; //rx-clk
 
    initial
      begin
      $dumpvars;
 	#1 reset = 1'b1;
 	#1 data_core = DATA;
-	#1 reset = 1'b0;
-	
+	#1 reset = 1'b0;	
         #2 v = 1'b1;
-        #10 v = 1'b0;
-        #5 data_core = 8'b0011_0101;
-        #1 v = 1'b1;
-        #10 v = 1'b0;
-        #20 data_core = 8'b1111_1111;
-        #21 v = 1'b1;
-        #25 v = 1'b0;
-        #5 reset = 1'b1;
-
+        #5 v = 1'b0;
+        
         #250 $finish;
      end
    
