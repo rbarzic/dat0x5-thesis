@@ -37,14 +37,14 @@ module receiver(/*AUTOARG*/
    dff  dff2(.q(r2), .d(r1), .clk(clk), .reset(reset));
    
    always @(posedge clk or posedge reset) begin
+      r3 <= r2;
+      d <= (!r3) & r2;
       if(reset) begin
 	 output_rx <= 0;
          statemachine <= 1'b0;	 
       end else begin
 	 if(r2 == 1'b1) begin
-	    output_rx <= input_rx; /* Latch the data into Rx-buffer*/	 
-	    r3 <= r2;
-	    d <= (!r3) & r2; 
+	    output_rx <= input_rx; /* Latch the data into Rx-buffer*/	  
 	    statemachine <= 1'b1;    
 	 end 
       end
