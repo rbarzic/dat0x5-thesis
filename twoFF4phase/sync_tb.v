@@ -8,14 +8,19 @@ parameter  DATA_WIDTH = `DATA_WIDTHS,
    wire [DATA_MSB:0]  outs;
    wire f, d;
    reg [DATA_MSB:0] data_core;
-   reg 		    clk, reset, v;
+   reg 		    clk1, clk2, reset, v;
  
-   sync_multi syncss1(.out_data(outs), .f(f), .d(d), .in_data(data_core), .v(v), .clk(clk), .reset(reset));
+   sync_multi syncss1(.out_data(outs), .f(f), .d(d), .in_data(data_core), .v(v), .clk1(clk1), .clk2(clk2), .reset(reset));
    
    initial        
-     clk = 1'b0;
+     clk1 = 1'b0;
    always
-     #1 clk = ~clk;
+     #1 clk1 = ~clk1;
+
+   initial        
+     clk2 = 1'b0;
+   always
+     #2 clk2 = ~clk2;
 
    initial
      begin
@@ -26,10 +31,15 @@ parameter  DATA_WIDTH = `DATA_WIDTHS,
 	
         #2 v = 1'b1;
         #10 v = 1'b0;
-        #1 data_core = 8'b0011_0101;
+        #5 data_core = 8'b0011_0101;
         #1 v = 1'b1;
         #10 v = 1'b0;
-        #100 $finish;
+        #20 data_core = 8'b1111_1111;
+        #21 v = 1'b1;
+        #25 v = 1'b0;
+        #5 reset = 1'b1;
+
+        #250 $finish;
      end
    
 endmodule // sync_tb
