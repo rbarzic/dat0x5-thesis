@@ -25,8 +25,7 @@ module dff(/*AUTOARG*/
       end
    end
   assign #DELAY q = q_i;
-  assign #DELAY q_bar = ~q_i;
-   
+  assign #DELAY q_bar = ~q_i;   
 endmodule // dff
 
 /*NOT gate*/
