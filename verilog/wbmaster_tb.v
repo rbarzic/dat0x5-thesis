@@ -32,7 +32,7 @@ begin
         #35 ack = 1'b1;
         data = 8'b1111_0000;
         #70 err = 1'b1;
-        #20000 $finish;
+        #200 $finish;
 
 end
 
