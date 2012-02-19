@@ -290,6 +290,86 @@ module mux(/*AUTOARG*/
    assign #DELAY q = s ? a[1] : a[0];
 endmodule // mux
 
+/* Data register with multiple buswidth and enable input*/
+module regdataen(/*AUTOARG*/
+   // Outputs
+   q,
+   // Inputs
+   a, en, reset
+   );
+   `include "def.v"
+
+   parameter DELAY = 1;
+
+   output [DATA_MSB:0] q;
+   input [DATA_MSB:0]  a;
+   input 	       en, reset;
+   
+   reg [DATA_MSB:0]    q_i;    
+   
+   always @(posedge en or posedge reset) begin
+      if(reset) begin
+	 q_i <= 0;
+      end else begin
+	 q_i <= a;	 
+      end      
+   end
+   assign #DELAY q = q_i;   
+endmodule // regdataen
+
+/* Data register with multiple buswidth and enable + enable* input*/
+module regdataenstar(/*AUTOARG*/
+   // Outputs
+   q,
+   // Inputs
+   a, en, reset, enstar
+   );
+   `include "def.v"
+
+   parameter DELAY = 1;
+
+   output [DATA_MSB:0] q;
+   input [DATA_MSB:0]  a;
+   input 	       en, reset, enstar;
+   
+   reg [DATA_MSB:0]    q_i;    
+   
+   always @(posedge en or posedge reset or negedge enstar) begin
+      if(reset) begin
+	 q_i <= 0;
+      end else begin
+	 q_i <= a;	 
+      end      
+   end
+   assign #DELAY q = q_i;   
+endmodule // regdataenstar
+
+/* Register with enable, enable stare and async reset */
+module regenstar(/*AUTOARG*/
+   // Outputs
+   q,
+   // Inputs
+   a, en, reset, enstar
+   );
+ 
+   parameter DELAY = 1;
+
+   output q;
+   input  a;
+   input  en, reset, enstar;
+   
+   reg q_i;    
+   
+   always @(posedge en or posedge reset or negedge enstar) begin
+      if(reset) begin
+	 q_i <= 0;
+      end else begin
+	 q_i <= a;	 
+      end      
+   end
+   assign #DELAY q = q_i;   
+endmodule // regenstar
+
 /* Yet to be done :-) */
 /* MUTEX element*/
 /* D-Flip flop with Async reset and EN* */
