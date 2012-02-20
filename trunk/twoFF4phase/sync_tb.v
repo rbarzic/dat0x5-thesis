@@ -20,7 +20,7 @@ parameter  DATA_WIDTH = `DATA_WIDTHS,
    initial        
      clk2 = 1'b0;
    always
-     #10 clk2 = ~clk2; //rx-clk
+     #1 clk2 = ~clk2; //rx-clk
 
    initial
      begin
