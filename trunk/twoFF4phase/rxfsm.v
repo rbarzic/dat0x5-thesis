@@ -50,7 +50,7 @@ module receiver(/*AUTOARG*/
       end
    end 
    
-    always@(posedge clk) begin
+    always@(posedge clk or posedge reset) begin
       
        if(reset) begin
 	  current_state <= rst;
