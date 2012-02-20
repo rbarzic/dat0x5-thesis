@@ -52,9 +52,9 @@ module transmitter(/*AUTOARG*/
    end   
 
    
-/*Below lines of code handles the transmitter state machine*/
+/*This task handles the transmitter state machine*/
      
-    always @(posedge clk) begin        
+    always @(posedge clk or posedge reset) begin        
        if(reset) begin
 	  current_state <= rst;
        end else begin
