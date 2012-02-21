@@ -6,10 +6,6 @@ module receiver(/*AUTOARG*/
    );
 `include "def.v"
 
-        parameter  DATA_WIDTH = `DATA_WIDTHS,
-           DATA_MSB = DATA_WIDTH-1,
-           DATA = `DATAS;
-
    input                clk, reset, req;   
    input [DATA_MSB:0]   input_rx; //Data input from other core
    output [DATA_MSB:0]  output_rx; //Data received
