@@ -7,10 +7,6 @@ module sync_multi(/*AUTOARG*/
 
 `include "def.v"
 
-   parameter  DATA_WIDTH = `DATA_WIDTHS,
-     DATA_MSB = DATA_WIDTH-1,
-     DATA = `DATAS;
-
    output [DATA_MSB:0] out_data;
    output 	       f, d;
    input [DATA_MSB:0]  in_data;

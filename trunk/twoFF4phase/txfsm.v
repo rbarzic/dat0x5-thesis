@@ -6,10 +6,6 @@ module transmitter(/*AUTOARG*/
    );
 `include "def.v"
 
-   parameter  DATA_WIDTH = `DATA_WIDTHS,
-           DATA_MSB = DATA_WIDTH-1,
-           DATA = `DATAS;
-
    input                clk,v,reset,ack;
    input [DATA_MSB:0]   input_tx; // Plug-in the data that has to be transmitted to other core
    output [DATA_MSB:0]  output_tx; // Tx-buffer

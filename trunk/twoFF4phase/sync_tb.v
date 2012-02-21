@@ -1,10 +1,6 @@
 module sync_tb();
 `include "def.v"
 
-parameter  DATA_WIDTH = `DATA_WIDTHS,
-           DATA_MSB = DATA_WIDTH-1,
-           DATA = `DATAS;
-
    wire [DATA_MSB:0]  outs;
    wire f, d;
    reg [DATA_MSB:0] data_core;
