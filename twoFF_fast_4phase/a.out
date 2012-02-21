@@ -163,7 +163,7 @@ module srlatch(/*AUTOARG*/
    s, r
    );
 
-   parameter DELAY = 1;
+   parameter DELAY = #1;
 
    output q, qbar;
    input  s, r;
@@ -173,15 +173,8 @@ module srlatch(/*AUTOARG*/
    reg			q;
    reg			qbar;
    // End of automatics
-   wire qbar_i, q_i;
-   nor2 norx(qbar_i, s, q_i);
-   nor2 nory(q_i, r, qbar_i);  
-        always @* begin
-                qbar = #DELAY qbar_i;
-                q = #DELAY q_i; 
-        end  
-   //assign #DELAY qbar =  qbar_i;
-   //assign #DELAY q = q_i;      
+   nor2 norx(qbar, s, q);
+   nor2 nory(q, r, qbar);   
 endmodule // srlatch
 
    
@@ -233,7 +226,16 @@ module regdata(/*AUTOARG*/
    // Inputs
    a, clk, reset
    );
-   `include "def.v"
+
+
+
+/*parameter aw = `address_width-1; // RB :see def.v ...
+parameter dw = `data_width-1;
+parameter sw = `select_width-1;
+parameter data_address = 8'b1111_1111;*/
+
+
+
 
    parameter DELAY = 1;
 
@@ -302,22 +304,31 @@ module regdataen(/*AUTOARG*/
    // Outputs
    q,
    // Inputs
-   a, en, reset, clk
+   a, en, reset
    );
-   `include "def.v"
+
+
+
+/*parameter aw = `address_width-1; // RB :see def.v ...
+parameter dw = `data_width-1;
+parameter sw = `select_width-1;
+parameter data_address = 8'b1111_1111;*/
+
+
+
 
    parameter DELAY = 1;
 
    output [DATA_MSB:0] q;
    input [DATA_MSB:0]  a;
-   input 	       en, reset, clk;
+   input 	       en, reset;
    
    reg [DATA_MSB:0]    q_i;    
    
-   always @(posedge en or posedge clk or posedge reset) begin
+   always @(posedge en or posedge reset) begin
       if(reset) begin
 	 q_i <= 0;
-      end else if(en) begin
+      end else begin
 	 q_i <= a;	 
       end      
    end
@@ -329,22 +340,31 @@ module regdataenstar(/*AUTOARG*/
    // Outputs
    q,
    // Inputs
-   a, en, reset, enstar, clk
+   a, en, reset, enstar
    );
-   `include "def.v"
+
+
+
+/*parameter aw = `address_width-1; // RB :see def.v ...
+parameter dw = `data_width-1;
+parameter sw = `select_width-1;
+parameter data_address = 8'b1111_1111;*/
+
+
+
 
    parameter DELAY = 1;
 
    output [DATA_MSB:0] q;
    input [DATA_MSB:0]  a;
-   input 	       en, reset, enstar,clk;
+   input 	       en, reset, enstar;
    
    reg [DATA_MSB:0]    q_i;    
    
-   always @(posedge en or posedge enstar or posedge clk or posedge reset ) begin
+   always @(posedge en or posedge reset or negedge enstar) begin
       if(reset) begin
 	 q_i <= 0;
-      end else if(en && enstar) begin
+      end else begin
 	 q_i <= a;	 
       end      
    end
@@ -356,58 +376,122 @@ module regenstar(/*AUTOARG*/
    // Outputs
    q,
    // Inputs
-   a, en, reset, enstar, clk
+   a, en, reset, enstar
    );
  
    parameter DELAY = 1;
 
    output q;
    input  a;
-   input  en, reset, enstar, clk;
+   input  en, reset, enstar;
    
    reg q_i;    
    
-   always @(posedge en or posedge enstar or posedge clk or posedge reset) begin
+   always @(posedge en or posedge reset or negedge enstar) begin
       if(reset) begin
 	 q_i <= 0;
-      end else if(en && enstar) begin
+      end else begin
 	 q_i <= a;	 
       end      
    end
    assign #DELAY q = q_i;   
 endmodule // regenstar
 
-/* data flip flop without qbar */
-module dffs(/*AUTOARG*/
-   // Outputs
-   q,
-   // Inputs
-   d, clk, reset
-   );
-
-   parameter DELAY = 1;
-   
-   input d,clk,reset;
-   output q;
-
-   reg 	  q_i;
- 	  
-   /*AUTOREG*/
-  
-   always @(posedge clk or posedge reset) begin
-      if(reset) begin
-	 q_i <= 1'b0; //using non blocking assignments for the sequential logic
-      end else begin
-	 q_i <= d;
-      end
-   end
-  assign #DELAY q = q_i;
- 
-endmodule // dffs
-
-
 /* Yet to be done :-) */
 /* MUTEX element*/
 /* D-Flip flop with Async reset and EN* */
 /* Asynchronous Controllers for LDL*/
 
+
+
+
+/*parameter aw = `address_width-1; // RB :see def.v ...
+parameter dw = `data_width-1;
+parameter sw = `select_width-1;
+parameter data_address = 8'b1111_1111;*/
+
+
+
+/* This module is the implementation of the Tx-FSM for the fast two flop-4 phase sync(literature : zerolatency.pdf page-4) */
+module txfsm(/*AUTOARG*/
+   // Outputs
+   snt, en,
+   // Inputs
+   vi, clk, reset, a2p, a2d
+   )
+
+
+   parameter  rst = 2'b00;  // Asynchronous reset state
+   parameter  wdata = 2'b01;  // Wait for the input 'v'
+   parameter  done = 2'b10; // Data is on the bus, send the request to receiver (this is push synchronizer)
+   parameter  wack = 2'b11; // Waiting for the deassertion of ack
+   
+   reg[1:0]   current_state, next_state;   
+   
+   output  snt, en;
+   input   vi, clk, reset, a2p, a2d;
+
+   /*AUTOREG*/
+   // Beginning of automatic regs (for this module's undeclared outputs)
+   reg			en;
+   reg			snt;
+   // End of automatics
+
+/*transmitter state machine*/   
+     /* Sequential block*/
+    always @(posedge clk or posedge reset) begin        
+       if(reset) begin
+	  current_state <= rst;
+       end else begin
+	  current_state <= next_state;
+       end
+    end
+
+   /* Combinational block*/
+   always @(*) begin
+      next_state = current_state;
+      case(current_state) 
+	 rst: begin
+	    next_state = wdata;
+	    en = 1'b0;
+	    snt = 1'b0;	    
+	 end
+
+	 wdata: begin
+	    if(vi == 1'b1 && a2d == 1'b0) begin 
+	       next_state = done;
+	       en = 1'b1;
+	       snt = 1'b0;		       
+	    end else if(vi == 1'b0 || a2d == 1'b1) begin
+	       next_state = wdata;
+	       en = 1'b1;
+	       snt = 1'b0;
+	 end
+
+	 done: begin
+	       next_state = wack;
+	       en = 1'b0;
+	       snt = 1'b1;	    	    
+	 end
+
+	 wack: begin
+	    if(a2p == 1'b1) begin
+	       next_state = wdata;
+	       en = 1'b0;
+	       snt = 1'b0;	
+	    end else if(a2p == 1'b0) begin
+	       next_state = wack;
+	       en = 1'b0;
+	       snt = 1'b0;
+	    end	    
+	 end
+	
+	 default: begin
+	    next_state = wdata;
+	    en = 1'b0;
+	    snt = 1'b0	    
+	 end	
+      endcase // case (current_state)
+   end // always @ (*)
+
+endmodule // txfsm
