@@ -36,12 +36,12 @@ module sync_tb();
    #1 vi = 1'b0;
 	#1 reset = 1'b1; k = 1;
         #1 reset = 1'b0;
-        repeat(4) begin
+        repeat(1) begin
                 
-	        #1 data_core = Mem[k]; 	        	
+	        #1 data_core = 8'b1111_1111; 	        	
                 #1 vi = 1'b1;
-                #2 vi = 1'b0;
-                k = k + 1;
+                #5 vi = 1'b0;
+                //k = k + 1;
         end
 
         #250 $finish;
