@@ -43,14 +43,12 @@ module txfsm(/*AUTOARG*/
             next_state = wdata;  
 	 end
 
-	 wdata: begin //01
-	    if(vi == 1'b1 && a2d == 1'b0) begin 	       
-	       en = 1'b1;
-	       snt = 1'b0;	
-               next_state = done;	       
-	    end else if(vi == 1'b0 || a2d == 1'b1) begin	      
+	 wdata: begin //01	  	       
 	       en = 1'b1;
 	       snt = 1'b0;
+            if(vi == 1'b1 && a2d == 1'b0) begin 	
+               next_state = done;	       
+	    end else if(vi == 1'b0 || a2d == 1'b1) begin	      
                next_state = wdata;
 	    end
         end
@@ -62,13 +60,11 @@ module txfsm(/*AUTOARG*/
 	 end
 
 	 wack: begin //11
-	    if(a2p == 1'b1) begin	       
-	       en = 1'b0;
-	       snt = 1'b0;	
+               en = 1'b0;
+	       snt = 1'b0;
+	    if(a2p == 1'b1) begin  	
                next_state = wdata;
 	    end else if(a2p == 1'b0) begin	       
-	       en = 1'b0;
-	       snt = 1'b0;
                next_state = wack;
 	    end	    
 	 end
