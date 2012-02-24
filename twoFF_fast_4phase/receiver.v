@@ -21,12 +21,22 @@ module receiver(/*AUTOARG*/
    wire 	      r2, r2d, f3in, r2dnot, arnot;
    wire [DATA_MSB:0]  rdata1;
    wire               vo1, ack1; 
-   /*instaniate the intermediate the fsm, wires and modules to form complete receiver*/
+   //wire               r3, r4;
+
+   /*instantiate the intermediate the fsm, wires and modules to form complete receiver*/
    regdataen regr(.q(rdata1), .a(data), .en(r2), .clk(clk_rx), .reset(reset));
 		  
    dffs f1(.q(r2), .d(req), .clk(clk_rx), .reset(reset));
 
-   dffs f2(.q(r2d), .d(r2), .clk(clk_rx), .reset(reset));
+   //dffs fxx(.q(r3), .d(req), .clk(clk_rx), .reset(reset));
+
+   //dffs fyy(.q(r4), .d(req), .clk(clk_rx), .reset(reset));
+
+   //dffs fzz(.q(r5), .d(req), .clk(clk_rx), .reset(reset));
+
+   dffs f2(.q(r2d), .d(r2), .clk(clk_rx), .reset(~r2));
+
+        //dffs f2(.q(r2d), .d(r4), .clk(clk_rx), .reset(reset));
 
    inv inv1(.idash(r2dnot), .i(r2d));
    

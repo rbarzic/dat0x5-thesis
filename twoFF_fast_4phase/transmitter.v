@@ -13,6 +13,7 @@ module transmitter(/*AUTOARG*/
    wire 	       en2, a2, a2d, a2p, f7in, en, nota2d, a2not;   
    wire  snt1, req1;   
    wire  [DATA_MSB:0]	data1;
+   wire               a3, a4;
    /*AUTOREG*/
    // Beginning of automatic regs (for this module's undeclared outputs)
    reg [DATA_MSB:0]	data;
@@ -31,7 +32,11 @@ module transmitter(/*AUTOARG*/
    
    regenstar regv(.q(req1), .a(vi), .en(en2), .enstar(a2not), .reset(a2), .clk(clk_tx));
 
+  // dffs fyy(.q(a4), .d(ack), .clk(clk_tx), .reset(reset)); 
+
    dffs f5(.q(a2), .d(ack), .clk(clk_tx), .reset(reset));
+
+   //dffs fxx(.q(a3), .d(ack), .clk(clk_tx), .reset(reset));
 
    dffs f6(.q(a2d), .d(a2), .clk(clk_tx), .reset(reset));
 
