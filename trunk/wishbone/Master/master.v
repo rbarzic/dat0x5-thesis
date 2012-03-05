@@ -60,7 +60,7 @@ module master( /*AUTOARG*/
    end
    
    /*Classic Standard Single Write*/  
-   task swrite;
+   task wr;
       input [ADR_MSB:0] addr_i;
       input [DATA_MSB:0] dat_o;      
       begin
@@ -89,7 +89,7 @@ module master( /*AUTOARG*/
    
    
    /*Classic Standard Single Read*/   
-   task sread;
+   task rd;
       input [ADR_MSB:0] addr_i;
       output [DATA_MSB:0] dat_o;      
       begin
@@ -118,7 +118,7 @@ module master( /*AUTOARG*/
    endtask // wait
    
    
-   task blkwrite;
+   task blkwr;
       input [ADR_MSB:0] addr_i;
       input [DATA_MSB:0] dat_o;      
       begin
@@ -175,7 +175,7 @@ module master( /*AUTOARG*/
 
 
       /*Classic Standard Block Read*/   
-   task blkread;
+   task blkrd;
       input [ADR_MSB:0] addr_i;
       output [DATA_MSB:0] dat_o;      
       begin
