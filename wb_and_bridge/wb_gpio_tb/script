@@ -1,0 +1,3 @@
+iverilog -o gpio clkrst.v gpio_defines.v gpio_testbench.v gpio_top.v gpio_mon.v tb_defines.v tb_tasks.v timescale.v wb_master_old.v
+vvp gpio -vcd
+gtkwave dump.vcd
