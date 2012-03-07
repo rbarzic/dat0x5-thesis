@@ -1,0 +1,5 @@
+iverilog -o txrx_tb txrx.v txrx_sync.v txfsmslow.v sync_tb.v 
+vvp txrx_tb -vcd
+gtkwave dump.vcd
+
+iverilog -o bridge_top bridge_top.v txrx.v bridge_tb.v txfsmslow.v timescale.v
