@@ -1,0 +1,78 @@
+#! /usr/bin/vvp
+:ivl_version "0.9.4 " "(v0_9_4)";
+:vpi_time_precision - 9;
+:vpi_module "system";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_0x14622b0 .scope module, "async_tb" "async_tb" 2 2;
+ .timescale -9 -9;
+v0x1473330_0 .net "ack", 0 0, L_0x1473700; 1 drivers
+v0x14733e0_0 .net "ask", 0 0, L_0x14738b0; 1 drivers
+v0x1473490_0 .var "latched", 0 0;
+v0x1473560_0 .var "req", 0 0;
+v0x1473630_0 .var "reset", 0 0;
+S_0x14623a0 .scope module, "aync_u0" "async" 2 8, 3 2, S_0x14622b0;
+ .timescale -9 -9;
+L_0x1473700 .functor AND 1, L_0x1473800, v0x1472c10_0, C4<1>, C4<1>;
+L_0x1473800 .functor NOT 1, v0x1473490_0, C4<0>, C4<0>, C4<0>;
+L_0x14738b0 .functor AND 1, L_0x1473960, v0x1473560_0, C4<1>, C4<1>;
+L_0x1473960 .functor NOT 1, v0x1472c10_0, C4<0>, C4<0>, C4<0>;
+v0x1472d60_0 .net *"_s0", 0 0, L_0x1473800; 1 drivers
+v0x1472e20_0 .net *"_s2", 0 0, L_0x1473960; 1 drivers
+v0x1472ec0_0 .alias "ack", 0 0, v0x1473330_0;
+v0x1472f60_0 .alias "ask", 0 0, v0x14733e0_0;
+v0x1473010_0 .net "c", 0 0, v0x1472c10_0; 1 drivers
+v0x14730c0_0 .net "latched", 0 0, v0x1473490_0; 1 drivers
+v0x1473180_0 .net "req", 0 0, v0x1473560_0; 1 drivers
+v0x1473230_0 .net "reset", 0 0, v0x1473630_0; 1 drivers
+S_0x1460550 .scope module, "cmuller_U0" "cmuller" 3 22, 4 8, S_0x14623a0;
+ .timescale -9 -9;
+v0x1460640_0 .alias "a", 0 0, v0x14730c0_0;
+v0x1472b70_0 .alias "b", 0 0, v0x1473180_0;
+v0x1472c10_0 .var "c", 0 0;
+v0x1472cb0_0 .alias "rstn", 0 0, v0x1473230_0;
+E_0x145f4c0 .event edge, v0x1472cb0_0, v0x1460640_0, v0x1472b70_0;
+    .scope S_0x1460550;
+T_0 ;
+    %wait E_0x145f4c0;
+    %load/v 8, v0x1472cb0_0, 1;
+    %cmpi/u 8, 0, 1;
+    %jmp/0xz  T_0.0, 4;
+    %ix/load 0, 1, 0;
+    %assign/v0 v0x1472c10_0, 0, 0;
+    %jmp T_0.1;
+T_0.0 ;
+    %load/v 8, v0x1460640_0, 1;
+    %load/v 9, v0x1472b70_0, 1;
+    %cmp/u 8, 9, 1;
+    %jmp/0xz  T_0.2, 4;
+    %load/v 8, v0x1460640_0, 1;
+    %ix/load 0, 1, 0;
+    %assign/v0 v0x1472c10_0, 1, 8;
+T_0.2 ;
+T_0.1 ;
+    %jmp T_0;
+    .thread T_0, $push;
+    .scope S_0x14622b0;
+T_1 ;
+    %vpi_call 2 20 "$dumpvars";
+    %set/v v0x1473630_0, 1, 1;
+    %set/v v0x1473560_0, 0, 1;
+    %set/v v0x1473490_0, 0, 1;
+    %delay 1, 0;
+    %set/v v0x1473630_0, 0, 1;
+    %delay 1, 0;
+    %set/v v0x1473560_0, 1, 1;
+    %delay 2, 0;
+    %set/v v0x1473490_0, 1, 1;
+    %delay 100, 0;
+    %vpi_call 2 30 "$finish";
+    %end;
+    .thread T_1;
+# The file index is used to find the file name in the following table.
+:file_names 5;
+    "N/A";
+    "<interactive>";
+    "async_tb.v";
+    "async.v";
+    "cmuller.v";

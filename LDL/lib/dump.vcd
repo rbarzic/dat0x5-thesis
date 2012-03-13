@@ -1,0 +1,63 @@
+$date
+	Mon Mar 12 14:10:29 2012
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ns
+$end
+$scope module async_tb $end
+$var wire 1 ! ack $end
+$var wire 1 " ask $end
+$var reg 1 # latched $end
+$var reg 1 $ req $end
+$var reg 1 % reset $end
+$scope module aync_u0 $end
+$var wire 1 ! ack $end
+$var wire 1 " ask $end
+$var wire 1 & c $end
+$var wire 1 ' latched $end
+$var wire 1 ( req $end
+$var wire 1 ) reset $end
+$scope module cmuller_U0 $end
+$var wire 1 ' a $end
+$var wire 1 ( b $end
+$var wire 1 ) rstn $end
+$var reg 1 * c $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+0*
+1)
+0(
+0'
+0&
+1%
+0$
+0#
+0"
+0!
+$end
+#1
+0%
+0)
+#2
+1"
+1$
+1(
+#4
+1#
+1'
+#5
+0"
+1*
+1&
+#6
+1!
+0#
+0'
+#106
