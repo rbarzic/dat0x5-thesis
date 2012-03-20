@@ -146,7 +146,7 @@ wb_master wb_master(
 
 
 /*Add Two FF*/
-twoFF twoFF_U0(.ack_o(ack1), .ack_in(ack), .clk_m(clk_m), .reset_m(rst));
+twoFF twoFF_U0(.ack_o(ack1), .ack_in(ack_ldl), .clk_m(clk_m), .reset_m(rst));
    
 /*Add LDL input port*/
    inputport LDLinput_U1(/*AUTOINST*/

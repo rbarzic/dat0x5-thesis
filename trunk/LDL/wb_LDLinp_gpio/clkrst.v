@@ -68,11 +68,11 @@ reg	rst_o1, rst_o2;	// Reset
 initial begin
 	clk_o1 = 0;
 	clk_o2 = 0;
-	rst_o1 = 1;
-        rst_o2 = 1;
+	rst_o2 = 1;
+        rst_o1 = 1;
 	#20;
 	rst_o1 = 0; //gpio reset
-        #500;
+        #600;
         rst_o2 = 0; //wbmaster reset
 end
 
