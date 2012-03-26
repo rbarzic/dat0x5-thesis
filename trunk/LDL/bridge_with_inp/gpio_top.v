@@ -309,7 +309,7 @@ reg   [gw-1:0]  nextc_sampled;  // Negedge external clock sampled inputs
 reg   [gw-1:0]  nextc_sampled;  // Negedge external clock sampled inputs
 `endif
 `endif //  GPIO_CLKPAD
-
+reg wb_ack_temp, tmp2, tmp3, tmp4;
 
 //
 // All WISHBONE transfer terminations are successful except when:
@@ -327,11 +327,18 @@ assign wb_ack = wb_cyc_i & wb_stb_i & !wb_err_o;
 // Optional registration of WB Ack
 //
 `ifdef GPIO_REGISTERED_WB_OUTPUTS
-always @(posedge wb_clk_i or posedge wb_rst_i)
-	if (wb_rst_i)
-		wb_ack_o <= #1 1'b0;
-	else
-		wb_ack_o <= #1 wb_ack & ~wb_ack_o & (!wb_err) ;
+always @(posedge wb_clk_i or posedge wb_rst_i) begin
+	if (wb_rst_i) begin
+		wb_ack_temp <= #1 1'b0;   
+                wb_ack_o <= #1 1'b0;              
+	end else begin
+		wb_ack_temp <= #1 wb_ack & ~wb_ack_o & (!wb_err) ;
+                tmp2 <= #1 wb_ack_temp;
+                tmp3 <= tmp2;
+                tmp4 <= tmp3;
+                wb_ack_o <= tmp4;
+        end
+end
 `else
 assign wb_ack_o = wb_ack;
 `endif
