@@ -726,8 +726,10 @@ begin
 		@(posedge gpio_testbench.clk);
 		getin(l2);
 		// Compare gpio_in and RGPIO_IN. Should be equal.
-		if (l1 != l2)
+		if (l1 != l2) begin
 			err = err + 1;
+                        $display("%d", err);                
+                end
 	end
 
 	// Phase 2
@@ -765,9 +767,11 @@ begin
 		gpio_testbench.gpio_mon.get_gpioout(l2);
 
 		// Compare gpio_out and RGPIO_OUT. Should be equal.
-		if (l1 != l2)
+		if (l1 != l2) begin
 			err = err + 1;
-	end
+                        $display("%d", err);   
+                end	
+        end
 
 	// Phase 4
 	//
@@ -800,8 +804,11 @@ begin
 		gpio_testbench.gpio_mon.get_gpiooen(l2);
 
 		// Compare gpio_oen and RGPIO_OE. Should be exactly opposite.
-		if (l1 != l2)
+		if (l1 != l2) begin
 			err = err + 1;
+                                                $display("%d", err);   
+                end
+
 	end
 
 	// Phase 6
@@ -1102,7 +1109,7 @@ initial begin
   gpio_testbench.text = "Test simple"; 
 	test_simple;
   gpio_testbench.text = "Test ptrig"; 
-	test_ptrig;
+	//test_ptrig;
 
 
 	$display;
