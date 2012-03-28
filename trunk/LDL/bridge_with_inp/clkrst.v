@@ -72,13 +72,13 @@ initial begin
         rst_o2 = 1;
 	#20;
 	rst_o2 = 0; //gpio reset
-        #600;
+        #700;
         rst_o1 = 0; //wbmaster reset
 end
 
 //
 // Clock
 //
-always #400 clk_o1 = ~clk_o1; //gpio clk
+always #600 clk_o1 = ~clk_o1; //gpio clk
 always #4 clk_o2 = ~clk_o2; //wbmaster clk
 endmodule
