@@ -13,7 +13,7 @@ module inputport(/*AUTOARG*/
    /*AUTOREG*/
    // Beginning of automatic regs (for this module's undeclared outputs)
    wire   y1;
-   reg ack_ip, valid;
+   reg ack_ip;
    // End of automatics
    wire   ask, ask_dash, latched1, valid1, ack_l;
    reg latched;
@@ -51,11 +51,6 @@ module inputport(/*AUTOARG*/
 		      // Inputs
 		      .s		(latched1),
 		      .r		(y1|reset));
-always @(posedge clk_inputport or posedge reset) begin
-if(reset)
-valid <= 1'b0;
-else
-valid <= valid1;
-end
+assign valid = valid1;
 
 endmodule // inputport
