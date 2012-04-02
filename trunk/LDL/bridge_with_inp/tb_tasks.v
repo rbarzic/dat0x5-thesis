@@ -556,6 +556,8 @@ begin
                @(posedge gpio_testbench.clk);
                @(posedge gpio_testbench.clk);
                @(posedge gpio_testbench.clk);
+               @(posedge gpio_testbench.clk);
+               @(posedge gpio_testbench.clk);
                // Read GPIO_RGPIO_IN
                getin(l2);
                -> reading; 
@@ -590,7 +592,8 @@ begin
                @(posedge gpio_testbench.clk);
                @(posedge gpio_testbench.clk);
                @(posedge gpio_testbench.clk);
-
+               @(posedge gpio_testbench.clk);
+               @(posedge gpio_testbench.clk);
        err = 0;
        for (i = 0; i < 10 * `GPIO_VERIF_INTENSITY; i = i +1) begin
                // Put something in RGPIO_OUT pins
@@ -600,7 +603,8 @@ begin
                // Advance time
                @(posedge gpio_testbench.clk);
                @(posedge gpio_testbench.clk);
-
+               @(posedge gpio_testbench.clk);
+               @(posedge gpio_testbench.clk);
                // Read gpio_out
                gpio_testbench.gpio_mon.get_gpioout(l2);
 
@@ -635,7 +639,8 @@ begin
                // Advance time
                @(posedge gpio_testbench.clk);
                @(posedge gpio_testbench.clk);
-
+               @(posedge gpio_testbench.clk);
+               @(posedge gpio_testbench.clk);
                // Read gpio_oen
                gpio_testbench.gpio_mon.get_gpiooen(l2);
 
@@ -678,7 +683,8 @@ begin
                // Advance time
                @(posedge gpio_testbench.clk);
                @(posedge gpio_testbench.clk);
-
+               @(posedge gpio_testbench.clk);
+               @(posedge gpio_testbench.clk);
                // Read gpio_out
                gpio_testbench.gpio_mon.get_gpioout(l4);
 
