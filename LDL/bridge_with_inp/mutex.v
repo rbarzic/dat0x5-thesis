@@ -18,7 +18,7 @@ module mutex(/*AUTOARG*/
    reg			g2;
    // End of automatics
    real v1, v2, diff, conf = 0;   
-   integer delay;
+   integer delay, setg1 = 0;
 
    always @* begin
         if(reset) begin
@@ -27,17 +27,19 @@ module mutex(/*AUTOARG*/
         end
    end
    always @(posedge r1) begin
+        #1;        
         if(!r2 && conf == 0) begin
               g1 = r1;
-        end else if (conf == 1) begin
+        end else if (conf == 1 && setg1) begin
               #delay g1 = r1;
         end 
    end
 
    always @(posedge r2) begin
+        #1;
          if(!r1 && conf == 0) begin
               g2 = r2;
-        end else if (conf == 1) begin
+        end else if (conf == 1 && setg1 == 0) begin
               #delay g2 = r2;
         end
    end
@@ -62,7 +64,11 @@ module mutex(/*AUTOARG*/
         diff = v2 - v1;
         if(diff <= 3 && diff >= -3) begin
                 conf = 1;
-                delay = $random;
+                delay = $random % 5;
+                if(delay % 2 == 0)
+                        setg1 = 1;
+                else
+                        setg1 = 0;
         end else begin
                 conf = 0;
         end            
